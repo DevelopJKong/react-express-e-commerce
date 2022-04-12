@@ -1,8 +1,24 @@
-module.exports = function getUser(req,res) {
-        res.send("user get");
-}
+const User = require("../models/User");
 
-module.exports = function postUser(req,res) {
-        const { username } = req.body;
-        
+const putUser = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+
+module.exports = {
+        putUser
 }
