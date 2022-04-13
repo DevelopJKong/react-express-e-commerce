@@ -4,6 +4,7 @@ const {
   getAllOrders,
   deleteOrder,
   getUserOrders,
+  getMonthlyIncome,
 } = require("../controllers/orderController");
 const {
   verifyToken,
@@ -13,10 +14,12 @@ const {
 
 const orderRouter = require("express").Router();
 
+orderRouter.get("/", verifyTokenAndAdmin, getAllOrders);
 orderRouter.post("/", verifyToken, createOrder);
+orderRouter.get("/income", verifyTokenAndAdmin, getMonthlyIncome);
+orderRouter.get("/find/:userId", verifyTokenAndAuthorization, getUserOrders);
 orderRouter.put("/:id", verifyTokenAndAdmin, updateOrder);
 orderRouter.delete("/:id", verifyTokenAndAdmin, deleteOrder);
-orderRouter.get("/find/:userId", verifyTokenAndAuthorization, getUserOrders);
-orderRouter.get("/", verifyTokenAndAdmin, getAllOrders);
+
 
 module.exports = orderRouter;

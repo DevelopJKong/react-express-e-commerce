@@ -1,5 +1,7 @@
-const router = require("express").Router();
+const { payment } = require("../controllers/stripeController");
 
-router.post("/payment", );
+const stripeRouter = require("express").Router();
 
-module.exports = router;
+stripeRouter.post("/payment", payment);
+
+module.exports = stripeRouter;
