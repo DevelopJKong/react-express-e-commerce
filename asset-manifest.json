@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/react-express-e-commerce/static/js/main.4ecf73f0.js",
+    "index.html": "/react-express-e-commerce/index.html",
+    "main.4ecf73f0.js.map": "/react-express-e-commerce/static/js/main.4ecf73f0.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.4ecf73f0.js"
+  ]
+}
