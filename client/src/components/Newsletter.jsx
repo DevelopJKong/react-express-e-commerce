@@ -45,7 +45,7 @@ const Button = styled.button`
 `;
 
 
-const Newletter = () => (
+const Newsletter = () => (
     <Container>
         <Title>Newsletter</Title>
         <Desc>Get timely updates from your favorite products.</Desc>
@@ -58,4 +58,4 @@ const Newletter = () => (
     </Container>
 );
 
-export default Newletter;
+export default Newsletter;
