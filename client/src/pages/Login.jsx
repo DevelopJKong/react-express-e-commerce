@@ -58,8 +58,8 @@ const Login = () => {
       <Input placeholder="username" />
       <Input placeholder="password" />
       <Button>LOGIN</Button>
-      <Link to={`/find`}>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-      <Link to={`/register`}>CREATE A NEW ACCOUNT</Link>
+      <Link to={`/react-express-e-commerce/find`}>DO NOT YOU REMEMBER THE PASSWORD?</Link>
+      <Link to={`/react-express-e-commerce/register`}>CREATE A NEW ACCOUNT</Link>
     </Form>
   </Wrapper>
 </Container>;

@@ -4,24 +4,28 @@ import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Cart from "./pages/Cart";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/register">
+        <Route path="/react-express-e-commerce/register">
           <Register />
         </Route>
-        <Router path="/login">
+        <Route path="/react-express-e-commerce/login">
           <Login />
-        </Router>
-        <Route path="/list/:id">
+        </Route>
+        <Route path="/react-express-e-commerce/list/:id">
           <Product />
         </Route>
-        <Route path="/list">
+        <Route path="/react-express-e-commerce/list">
           <ProductList />
-        </Route>    
-        <Route path="/">
+        </Route> 
+        <Route path="/react-express-e-commerce/cart">
+          <Cart/>
+        </Route>
+        <Route path="/react-express-e-commerce">
           <Home />
         </Route>
       </Switch>

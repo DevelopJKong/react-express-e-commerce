@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
@@ -68,14 +69,14 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Cafe Small House</Logo>
+          <Logo><Link to={`/react-express-e-commerce`}>Cafe Small House</Link></Logo>
         </Center>
         <Right>
-          <MenuItem>RESITER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem><Link to={`/react-express-e-commerce/register`}>RESITER</Link></MenuItem>
+          <MenuItem><Link to={`/react-express-e-commerce/login`}>SIGN IN</Link></MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
+              <Link to={`/react-express-e-commerce/cart`}><ShoppingCartOutlined /></Link>
             </Badge>
           </MenuItem>
         </Right>
