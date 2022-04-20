@@ -8,9 +8,11 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
@@ -22,10 +24,12 @@ const Left = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: "none" })}
 `;
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: "#fff8f8" })}
 `;
 const Logo = styled.h1`
   font-size: 40px;
@@ -74,7 +78,7 @@ const ContentItem = styled.div`
 `;
 
 const Payment = styled.img`
-    width:50%;
+  width: 50%;
 `;
 
 const Footer = () => {
@@ -118,15 +122,15 @@ const Footer = () => {
       <Right>
         <Title></Title>
         <ContentItem>
-          <Room style={{ margin:"10px"}}/>
+          <Room style={{ margin: "10px" }} />
           622 Dixie Path, South Tobinchester 98336
         </ContentItem>
         <ContentItem>
-          <PhoneIphoneOutlined style={{ margin:"10px"}} />
+          <PhoneIphoneOutlined style={{ margin: "10px" }} />
           +1 234 56 78
         </ContentItem>
         <ContentItem>
-          <Mail style={{ margin:"10px"}} />
+          <Mail style={{ margin: "10px" }} />
           contact@cafesmallhouse.com
         </ContentItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />

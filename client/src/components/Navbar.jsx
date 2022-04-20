@@ -2,14 +2,19 @@ import styled from "styled-components";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 60px;
+  ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
   display: flex;
   padding: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+  ${mobile({ padding: "10px 0px" })}
 `;
 const Left = styled.div`
   flex: 1;
@@ -27,11 +32,13 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({ justifyContent: "center" })}
 `;
 
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
+  ${mobile({ display: "none" })}
 `;
 
 const SearchContainer = styled.div`
@@ -45,39 +52,60 @@ const SearchContainer = styled.div`
 const Input = styled.input`
   outline: none;
   border: none;
+  ${mobile({ width: "50px" })}
 `;
 
 const Logo = styled.h1`
   font-weight: bold;
+  ${mobile({ flex: 2, fontSize: "10px" })}
 `;
+
+const BadgeStyle = styled(Badge)``
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  ${mobile({ fontSize:"10px",marginLeft:"5px" })};
+  ${BadgeStyle} {
+    ${mobile({ display:"none" })};
+  }
 `;
 
+
+
+
 const Navbar = () => {
+  const logoText = "Cafe Small House";
+
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>EN</Language>
           <SearchContainer>
-            <Input />
-            <Search style={{ color: "gray",fontSize: 16}}/>
+            <Input placeholder="Search" />
+            <Search style={{ color: "gray", fontSize: 16 }} />
           </SearchContainer>
         </Left>
         <Center>
-          <Logo><Link to={`/react-express-e-commerce`}>Cafe Small House</Link></Logo>
+          <Logo>
+            <Link to={`/react-express-e-commerce`}>{logoText}</Link>
+          </Logo>
         </Center>
         <Right>
-          <MenuItem><Link to={`/react-express-e-commerce/register`}>RESITER</Link></MenuItem>
-          <MenuItem><Link to={`/react-express-e-commerce/login`}>SIGN IN</Link></MenuItem>
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <Link to={`/react-express-e-commerce/cart`}><ShoppingCartOutlined /></Link>
-            </Badge>
+            <Link to={`/react-express-e-commerce/register`}>RESITER</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to={`/react-express-e-commerce/login`}>SIGN IN</Link>
+          </MenuItem>
+          <MenuItem>
+            <BadgeStyle badgeContent={4} color="primary">
+              <Link to={`/react-express-e-commerce/cart`}>
+                <ShoppingCartOutlined />
+              </Link>
+            </BadgeStyle>
           </MenuItem>
         </Right>
       </Wrapper>
