@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route,Redirect } from "react-router-dom";
 import Product from "./pages/Product";
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
@@ -7,25 +7,26 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 
 const Router = () => {
+  const user = false;
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/react-express-e-commerce/register">
-          <Register />
+        {user ? <Redirect to="/react-express-e-commerce"/> : <Register />}
         </Route>
         <Route path="/react-express-e-commerce/login">
-          <Login />
+          {user ? <Redirect to="/react-express-e-commerce"/> : <Login />}
         </Route>
-        <Route path="/react-express-e-commerce/list/:id">
-          <Product />
-        </Route>
-        <Route path="/react-express-e-commerce/list">
-          <ProductList />
-        </Route> 
         <Route path="/react-express-e-commerce/cart">
           <Cart/>
         </Route>
-        <Route path="/react-express-e-commerce">
+        <Route path="/react-express-e-commerce/products/:category">
+          <ProductList />
+        </Route> 
+        <Route path="/react-express-e-commerce/products/:id">
+          <Product />
+        </Route>
+        <Route exact path="/react-express-e-commerce">
           <Home />
         </Route>
       </Switch>
