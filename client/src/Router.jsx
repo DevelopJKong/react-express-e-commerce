@@ -16,7 +16,7 @@ const Router = () => {
         </Route>
         <Route path="/react-express-e-commerce/login">
           {user ? <Redirect to="/react-express-e-commerce"/> : <Login />}
-        </Route>
+        </Route> 
         <Route path="/react-express-e-commerce/cart">
           <Cart/>
         </Route>
