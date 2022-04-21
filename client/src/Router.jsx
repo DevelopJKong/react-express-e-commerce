@@ -5,11 +5,13 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import ScrollToTop from "./components/ScorllToTop";
 
 const Router = () => {
   const user = false;
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Switch>
         <Route path="/react-express-e-commerce/register">
         {user ? <Redirect to="/react-express-e-commerce"/> : <Register />}
@@ -20,12 +22,12 @@ const Router = () => {
         <Route path="/react-express-e-commerce/cart">
           <Cart/>
         </Route>
+        <Route path="/react-express-e-commerce/product/:id">
+          <Product />
+        </Route>
         <Route path="/react-express-e-commerce/products/:category">
           <ProductList />
         </Route> 
-        <Route path="/react-express-e-commerce/products/:id">
-          <Product />
-        </Route>
         <Route exact path="/react-express-e-commerce">
           <Home />
         </Route>

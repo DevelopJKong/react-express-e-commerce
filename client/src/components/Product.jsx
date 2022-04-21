@@ -4,6 +4,7 @@ import {
   ShoppingBasketOutlined,
 } from "@material-ui/icons";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Info = styled.div`
@@ -80,7 +81,9 @@ const Product = ({ item }) => {
           <ShoppingBasketOutlined />
         </Icon>
         <Icon>
-          <SearchOutlined />
+          <Link to={`/react-express-e-commerce/product/${item._id}`}>
+            <SearchOutlined />
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />

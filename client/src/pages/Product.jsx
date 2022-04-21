@@ -1,4 +1,6 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -110,6 +112,22 @@ const Amount = styled.span`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[3];
+
+  const [product,setProduct] = useState({});
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const data = await (await fetch(
+          "http://localhost:5050/api"
+        )).json()
+      } catch (error) {
+        
+      }
+    }
+  },[id]);
   return (
     <Container>
       <Navbar />

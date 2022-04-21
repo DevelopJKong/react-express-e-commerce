@@ -1,5 +1,6 @@
 import Router from "./Router";
 import { createGlobalStyle } from "styled-components";
+import ScrollToTop from "./components/ScorllToTop";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
