@@ -11,7 +11,7 @@ const Container = styled.div`
 const Products = ({ cat, filters, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+ 
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -22,15 +22,13 @@ const Products = ({ cat, filters, sort }) => {
               : `http://localhost:5050/api/products`
           )
         ).json();
-        console.log(data);
-        console.log(cat);
         setProducts(data ?? []);
       } catch (error) {
         console.log(error);
       }
     };
     getProducts();
-  }, [cat, filters, sort]);
+  }, [cat]);
 
   useEffect(() => {
     cat &&
@@ -58,15 +56,14 @@ const Products = ({ cat, filters, sort }) => {
       );
     }
   }, [sort]);
-  
+
   return (
     <Container>
-      {cat 
-        ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
+      {cat
+        ? filteredProducts.map((item) => <Product item={item} key={item._id} />)
         : products
             .slice(0, 8)
-            .map((item) => <Product item={item} key={item.id} />)
-      }
+            .map((item) => <Product item={item} key={item._id} />)}
     </Container>
   );
 };
