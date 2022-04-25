@@ -3,6 +3,7 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60px;
@@ -60,23 +61,21 @@ const Logo = styled.h1`
   ${mobile({ flex: 2, fontSize: "10px" })}
 `;
 
-const BadgeStyle = styled(Badge)``
+const BadgeStyle = styled(Badge)``;
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
-  ${mobile({ fontSize:"10px",marginLeft:"5px" })};
+  ${mobile({ fontSize: "10px", marginLeft: "5px" })};
   ${BadgeStyle} {
-    ${mobile({ display:"none" })};
+    ${mobile({ display: "none" })};
   }
 `;
 
-
-
-
 const Navbar = () => {
   const logoText = "Cafe Small House";
+  const quantity = useSelector((state) => state.cart.quantity);
 
   return (
     <Container>
@@ -101,7 +100,7 @@ const Navbar = () => {
             <Link to={`/react-express-e-commerce/login`}>SIGN IN</Link>
           </MenuItem>
           <MenuItem>
-            <BadgeStyle badgeContent={4} color="primary">
+            <BadgeStyle badgeContent={quantity} color="primary">
               <Link to={`/react-express-e-commerce/cart`}>
                 <ShoppingCartOutlined />
               </Link>

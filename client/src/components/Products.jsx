@@ -13,13 +13,14 @@ const Products = ({ cat, filters, sort }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
  
   useEffect(() => {
+    const baseUrl = "http://localhost:5050/api/products"
     const getProducts = async () => {
       try {
         const data = await (
           await fetch(
             cat
-              ? `http://localhost:5050/api/products?category=${cat}`
-              : `http://localhost:5050/api/products`
+              ? `${baseUrl}?category=${cat}`
+              : `${baseUrl}`
           )
         ).json();
         setProducts(data ?? []);
