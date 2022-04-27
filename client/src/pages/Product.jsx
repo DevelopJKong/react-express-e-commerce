@@ -1,4 +1,4 @@
-import { Add, ColorizeOutlined, Remove } from "@material-ui/icons";
+import { Add, Remove } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import styled from "styled-components";
