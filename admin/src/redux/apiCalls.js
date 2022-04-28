@@ -14,10 +14,8 @@ export const login = async (dispatch, user) => {
         }),
       })
     ).json();
-    console.log(data);
     dispatch(loginSuccess(data));
   } catch (error) {
-    console.log(error);
     dispatch(loginFailure());
   }
 };
