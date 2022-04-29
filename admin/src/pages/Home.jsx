@@ -1,25 +1,15 @@
 import styled from "styled-components";
-import Sidebar from "../components/sidebar/Sidebar";
-import Topbar from "../components/topbar/Topbar";
-
+import FeaturedInf from "../components/featureInfo/FeatureInf";
 const Container = styled.div`
-    display:flex;
-`;
-
-const Others = styled.div`
-    flex:4;
+  flex:4;
 `;
 
 
 const Home = () => {
   return (
-    <>
-      <Topbar />
-      <Container>
-          <Sidebar />
-          <Others>other pages</Others>
-      </Container>
-    </>
+    <Container>
+      <FeaturedInf />
+    </Container>
   );
 };
 

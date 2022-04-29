@@ -1,13 +1,27 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import Sidebar from "./components/sidebar/Sidebar";
+import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+
+const Container = styled.div`
+    display:flex;
+    margin-top:10px;
+`;
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/">
-          <Home />
+          <>
+            <Topbar />
+            <Container>
+              <Sidebar />
+              <Home />
+            </Container>
+          </>
         </Route>
         <Route path="/login">
           <Login />
