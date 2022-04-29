@@ -4,19 +4,19 @@ const TopbarContainer = styled.div`
   width: 100%;
   height: 50px;
   background-color: white;
-  padding-top:5px;
-  position:sticky;
-  top:0;
-  z-index:999;
+  padding-top: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 `;
-const TopbarWrapper = styled.div`
+const Wrapper = styled.div`
   height: 100%;
   padding: 0px 20px;
   display: flex;
   justify-content: space-between;
 `;
 
-const TopLeft = styled.div``;
+const Left = styled.div``;
 
 const Logo = styled.span`
   font-weight: bold;
@@ -28,19 +28,19 @@ const Logo = styled.span`
   justify-content: space-between;
 `;
 
-const TopRight = styled.div`
+const Right = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const TopbarIconContainer = styled.div`
+const Icon = styled.div`
   position: relative;
   margin-right: 10px;
   cursor: pointer;
   color: #555;
 `;
 
-const TopIconBag = styled.span`
+const IconBag = styled.span`
   position: absolute;
   width: 15px;
   height: 15px;
@@ -55,38 +55,37 @@ const TopIconBag = styled.span`
   font-size: 10px;
 `;
 
-const TopAvatar = styled.img`
-  width:50px;
-  height:50px;
-  border-radius:50%;
-
+const Avatar = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 `;
 
 const Topbar = () => {
   return (
     <TopbarContainer>
-      <TopbarWrapper>
-        <TopLeft>
+      <Wrapper>
+        <Left>
           <Logo>Cafe Small House</Logo>
-        </TopLeft>
-        <TopRight>
-          <TopbarIconContainer>
+        </Left>
+        <Right>
+          <Icon>
             <NotificationsNone />
-            <TopIconBag>2</TopIconBag>
-          </TopbarIconContainer>
+            <IconBag>2</IconBag>
+          </Icon>
 
-          <TopbarIconContainer>
+          <Icon>
             <Language />
-            <TopIconBag>2</TopIconBag>
-          </TopbarIconContainer>
+            <IconBag>2</IconBag>
+          </Icon>
 
-          <TopbarIconContainer>
+          <Icon>
             <Settings />
-          </TopbarIconContainer>
+          </Icon>
 
-          <TopAvatar src="https://source.unsplash.com/random/1" />
-        </TopRight>
-      </TopbarWrapper>
+          <Avatar src="https://source.unsplash.com/random/1" />
+        </Right>
+      </Wrapper>
     </TopbarContainer>
   );
 };
