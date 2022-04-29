@@ -13,10 +13,9 @@ const Item = styled.div`
   padding: 30px;
   border-radius: 10px;
   cursor: pointer;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75),
-    0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75),
-    0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75)
+
 `;
 
 const Title = styled.span`
