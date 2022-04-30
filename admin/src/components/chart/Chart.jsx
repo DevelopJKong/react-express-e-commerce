@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { PureComponent } from "react";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -21,8 +21,7 @@ const Title = styled.h3`
   margin-bottom: 20px;
 `;
 
-const Chart = ({ title, data, dataKey,grid}) => {
- 
+const Chart = ({ title, data, dataKey, grid }) => {
   return (
     <Container>
       <Title>{title}</Title>
@@ -30,9 +29,9 @@ const Chart = ({ title, data, dataKey,grid}) => {
         <LineChart data={data}>
           <XAxis dataKey="name" stroke="#5550bd" />
           <Line type="monotone" dataKey={dataKey} stroke="#5550bd" />
-          <Tooltip/>
-          { grid && <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5"/>}
-          <Legend/>
+          <Tooltip />
+          {grid && <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />}
+          <Legend />
         </LineChart>
       </ResponsiveContainer>
     </Container>
