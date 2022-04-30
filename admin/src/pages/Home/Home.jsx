@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <Container>
       <FeaturedInf />
-      <Chart data={userData} title="User Analytics" grid dataKey="Active User"/>
+      <Chart data={userData} title="User Analytics" grid dataKey="Active User"/> 
       <HomeWidget>
         <WidgetSm />
         <WidgetLg />

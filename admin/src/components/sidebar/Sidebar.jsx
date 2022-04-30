@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "./Sidebar.css";
 import {
   AttachMoney,
   BarChart,
@@ -13,13 +14,14 @@ import {
   TrendingUp,
   WorkOutline,
 } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const SidebarContainer = styled.div`
   flex: 1;
   height: calc(100vh - 50px);
-  background-color: rgb(251,,251,255);
+  background-color: rgb(251, , 251, 255);
   position: sticky;
-  top:50px;
+  top: 50px;
 `;
 const Wrapper = styled.div`
   padding: 20px;
@@ -46,7 +48,6 @@ const ListItem = styled.li`
   display: flex;
   align-items: center;
   border-radius: 10px;
-  background-color: ${(props) => props.bgColor};
   &:hover {
     background-color: rgb(228, 228, 250);
   }
@@ -55,25 +56,37 @@ const ListItem = styled.li`
     margin-right: 5px;
     font-size: 20px !important;
   }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
-
 const Sidebar = () => {
-  const bgColor = "rgb(228, 228, 250)";
-
+  const handleClick = (e) => {
+    e.target.parentNode.classList.add("active");
+    setTimeout(() => e.target.parentNode.classList.remove("active"), 4000);
+  };
   return (
     <SidebarContainer>
       <Wrapper>
         <Menu>
           <Title>Dashboard</Title>
           <List>
-            <ListItem bgColor={bgColor}>
-              <LineStyle /> Home
+            <ListItem className="active">
+              <LineStyle />
+              <Link onClick={handleClick} to={`/`}>
+                Home
+              </Link>
             </ListItem>
             <ListItem>
-              <Timeline /> Analytics
+              <Link onClick={handleClick} to={`#`}>
+                <Timeline /> Analytics
+              </Link>
             </ListItem>
             <ListItem>
-              <TrendingUp /> Sales
+              <Link onClick={handleClick} to={`#`}>
+                <TrendingUp /> Sales
+              </Link>
             </ListItem>
           </List>
         </Menu>
@@ -81,16 +94,25 @@ const Sidebar = () => {
           <Title>Quick Menu</Title>
           <List>
             <ListItem>
-              <PermIdentity /> Users
+              <PermIdentity />
+              <Link onClick={handleClick} to={`/users`}>
+                Users
+              </Link>
             </ListItem>
             <ListItem>
-              <Storefront /> Products
+              <Link onClick={handleClick} to={`#`}>
+                <Storefront /> Products
+              </Link>
             </ListItem>
             <ListItem>
-              <AttachMoney /> Transactions
+              <Link onClick={handleClick} to={`#`}>
+                <AttachMoney /> Transactions
+              </Link>
             </ListItem>
             <ListItem>
-              <BarChart /> Reports
+              <Link onClick={handleClick} to={`#`}>
+                <BarChart /> Reports
+              </Link>
             </ListItem>
           </List>
         </Menu>
@@ -98,13 +120,19 @@ const Sidebar = () => {
           <Title>Notifications</Title>
           <List>
             <ListItem>
-              <MailOutline /> Mail
+              <Link onClick={handleClick} to={`#`}>
+                <MailOutline /> Mail
+              </Link>
             </ListItem>
             <ListItem>
-              <DynamicFeed /> Feedback
+              <Link onClick={handleClick} to={`#`}>
+                <DynamicFeed /> Feedback
+              </Link>
             </ListItem>
             <ListItem>
-              <ChatBubbleOutline /> Messages
+              <Link onClick={handleClick} to={`#`}>
+                <ChatBubbleOutline /> Messages
+              </Link>
             </ListItem>
           </List>
         </Menu>
@@ -112,13 +140,19 @@ const Sidebar = () => {
           <Title>Staff</Title>
           <List>
             <ListItem>
-              <WorkOutline /> Manage
+              <Link onClick={handleClick} to={`#`}>
+                <WorkOutline /> Manage
+              </Link>
             </ListItem>
             <ListItem>
-              <Timeline /> Analytics
+              <Link onClick={handleClick} to={`#`}>
+                <Timeline /> Analytics
+              </Link>
             </ListItem>
             <ListItem>
-              <Report /> Reports
+              <Link onClick={handleClick} to={`#`}>
+                <Report /> Reports
+              </Link>
             </ListItem>
           </List>
         </Menu>
