@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
+import NewProduct from "./pages/newProduct/NewProduct";
 import NewUser from "./pages/newUser/NewUser";
+import Product from "./pages/product/Product";
 import ProductList from "./pages/productsList/ProductList";
 import User from "./pages/user/User";
 import UserList from "./pages/userList/UserList";
@@ -37,14 +38,12 @@ const Router = () => {
             <ProductList />
           </Route>
           <Route path="/product/:productId">
-            <NewUser />
+            <Product />
           </Route>
           <Route path="/newproduct">
-            <NewUser />
+            <NewProduct />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
+    
         </Switch>
       </Container>
     </BrowserRouter>
