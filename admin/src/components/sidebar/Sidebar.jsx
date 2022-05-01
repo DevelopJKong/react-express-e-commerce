@@ -62,17 +62,28 @@ const ListItem = styled.li`
   }
 `;
 const Sidebar = () => {
+  let preNode;
   const handleClick = (e) => {
+    if (preNode) {
+      handleNode();
+    }
+    const home = document.querySelector("#home");
+    home.classList.remove("active");
+    preNode = e.target.parentNode;
     e.target.parentNode.classList.add("active");
-    setTimeout(() => e.target.parentNode.classList.remove("active"), 4000);
   };
+
+  const handleNode = (e) => {
+    preNode.classList.remove("active");
+  };
+
   return (
     <SidebarContainer>
       <Wrapper>
         <Menu>
           <Title>Dashboard</Title>
           <List>
-            <ListItem className="active">
+            <ListItem className="active" id="home">
               <LineStyle />
               <Link onClick={handleClick} to={`/`}>
                 Home

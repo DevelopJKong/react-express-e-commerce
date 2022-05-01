@@ -1,51 +1,99 @@
 import styled from "styled-components";
 import { DataGrid } from "@material-ui/data-grid";
+import { DeleteOutlined } from "@material-ui/icons";
+import { userRows } from "../../dummyData";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 const Container = styled.div`
   flex: 4;
 `;
 
-const UserList = () => {
-  const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
-    },
-    {
-      field: "fullName",
-      headerName: "Full name",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-    },
-  ];
+const ListUser = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+const ListImg = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+`;
+
+const ListEdit = styled.button`
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin: 20px;
+`;
+
+const DeleteBtn = styled(DeleteOutlined)`
+  color: red;
+  cursor: pointer;
+`;
+
+const UserList = () => {
+  const [data, setData] = useState(userRows);
+
+  const handleDelete = (id) => {
+      setData(data.filter(item => item.id !== id))
+  };
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "user",
+      headerName: "User",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <ListUser>
+            <ListImg src={params.row.avatar} alt="#" />
+            {params.row.username}
+          </ListUser>
+        );
+      },
+    },
+    { field: "email", headerName: "Email", width: 200 },
+    {
+      field: "status",
+      headerName: "Staus",
+      width: 120,
+    },
+    {
+      field: "transaction",
+      headerName: "Transction Volume",
+      width: 200,
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/user/${params.row.id}`}>
+              <ListEdit>Edit</ListEdit>
+            </Link>
+            <DeleteBtn onClick={() => handleDelete(params.row.id)} />
+          </>
+        );
+      },
+    },
   ];
 
   return (
     <Container>
-      <div style={{ height: 400, width: "100%" }}>
+      <div style={{ height: 700, width: "100%" }}>
         <DataGrid
-          rows={rows}
+          rows={data}
+          disableSelectionOnClick
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={8}
+          rowsPerPageOptions={[8]}
           checkboxSelection
         />
       </div>
