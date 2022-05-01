@@ -2,11 +2,11 @@ import {
   CalendarToday,
   LocationSearching,
   MailOutline,
-  MailOutlined,
   PermIdentity,
   PhoneAndroid,
+  Publish,
 } from "@material-ui/icons";
-import "./user.css";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -98,6 +98,70 @@ const UserUpdate = styled.div`
   margin-left: 20px;
 `;
 
+const UpdateTitle = styled.span`
+  font-size: 24px;
+  font-weight: 600;
+`;
+
+const UpdateForm = styled.form`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+const UpdateLeft = styled.div``;
+
+const UpdateItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+  & > label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+`;
+
+const UpdateRight = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const UpdateInput = styled.input`
+  border: none;
+  width: 250px;
+  height: 30px;
+  border-bottom: 1px solid gray;
+`;
+
+const UpdateUpload = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const UpdateImg = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+`;
+
+const UpdateIcon = styled(Publish)`
+  cursor: pointer;
+`;
+
+const UpdateButton = styled.button`
+    border-radius: 5px;
+    border: none;
+    padding:5px;
+    cursor: pointer;
+    background-color:darkblue;
+    color:white;
+    font-weight: 600;
+`;
+
 const userShowIcon = {
   fontSize: "16px",
 };
@@ -107,7 +171,9 @@ const User = () => {
     <Container>
       <TitleContainer>
         <Title>Edit User</Title>
-        <AddButton>Create</AddButton>
+        <Link to={`/newUser`}>
+            <AddButton>Create</AddButton>
+        </Link>
       </TitleContainer>
 
       <UserContainer>
@@ -144,7 +210,43 @@ const User = () => {
             </ShowInfo>
           </ShowBottom>
         </UserShow>
-        <UserUpdate></UserUpdate>
+        <UserUpdate>
+          <UpdateTitle>Edit</UpdateTitle>
+          <UpdateForm>
+            <UpdateLeft>
+              <UpdateItem>
+                <label>Username</label>
+                <UpdateInput type="text" placeholder="annabeck99" />
+              </UpdateItem>
+              <UpdateItem>
+                <label>Full Name</label>
+                <UpdateInput type="text" placeholder="Anna Backer" />
+              </UpdateItem>
+              <UpdateItem>
+                <label>Email</label>
+                <UpdateInput type="text" placeholder="annabeck99@gmail.com" />
+              </UpdateItem>
+              <UpdateItem>
+                <label>Phone</label>
+                <UpdateInput type="text" placeholder="+1 123 456 67" />
+              </UpdateItem>
+              <UpdateItem>
+                <label>Address</label>
+                <UpdateInput type="text" placeholder="New York | USA" />
+              </UpdateItem>
+            </UpdateLeft>
+            <UpdateRight>
+              <UpdateUpload>
+                <UpdateImg src="https://source.unsplash.com/random/15" />
+                <label htmlFor="file">
+                  <UpdateIcon />
+                </label>
+                <input type="file" id="file" style={{ display: "none" }} />
+              </UpdateUpload>
+              <UpdateButton>Update</UpdateButton>
+            </UpdateRight>
+          </UpdateForm>
+        </UserUpdate>
       </UserContainer>
     </Container>
   );
