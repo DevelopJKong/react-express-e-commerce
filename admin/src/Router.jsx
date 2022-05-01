@@ -4,6 +4,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import User from "./pages/user/User";
 import UserList from "./pages/userList/UserList";
 
 const Container = styled.div`
@@ -23,6 +24,9 @@ const Router = () => {
           </Route>
           <Route path="/users">
             <UserList />
+          </Route>
+          <Route path="/user/:userId">
+            <User />
           </Route>
           <Route path="/login">
             <Login />
