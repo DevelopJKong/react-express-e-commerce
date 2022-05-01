@@ -1,9 +1,10 @@
-import styled from "styled-components";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutlined } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { productRows } from "../../dummyData";
+
 const Container = styled.div`
   flex: 4;
 `;
@@ -36,8 +37,8 @@ const DeleteBtn = styled(DeleteOutlined)`
   cursor: pointer;
 `;
 
-const UserList = () => {
-  const [data, setData] = useState(userRows);
+const ProductList = () => {
+  const [data, setData] = useState(productRows);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -45,27 +46,27 @@ const UserList = () => {
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
-      field: "user",
-      headerName: "User",
+      field: "product",
+      headerName: "Product",
       width: 200,
       renderCell: (params) => {
         return (
           <ListUser>
-            <ListImg src={params.row.avatar} alt="#" />
-            {params.row.username}
+            <ListImg src={params.row.img} alt="#" />
+            {params.row.name}
           </ListUser>
         );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "stock", headerName: "Stock", width: 200 },
     {
       field: "status",
       headerName: "Staus",
       width: 120,
     },
     {
-      field: "transaction",
-      headerName: "Transction Volume",
+      field: "price",
+      headerName: "Price Volume",
       width: 200,
     },
     {
@@ -75,7 +76,7 @@ const UserList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/user/${params.row.id}`}>
+            <Link to={`/product/${params.row.id}`}>
               <ListEdit>Edit</ListEdit>
             </Link>
             <DeleteBtn onClick={() => handleDelete(params.row.id)} />
@@ -84,7 +85,6 @@ const UserList = () => {
       },
     },
   ];
-
   return (
     <Container>
       <div style={{ height: 700, width: "100%" }}>
@@ -101,4 +101,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default ProductList;
