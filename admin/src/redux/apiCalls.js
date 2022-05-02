@@ -1,21 +1,26 @@
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import { publicRequest, userRequest } from "../responseMethods";
+import {
+  getProductFailure,
+  getProductStart,
+  getProductSuccess,
+  deleteProductFailure,
+  deleteProductStart,
+  deleteProductSuccess,
+  updateProductFailure,
+  updateProductStart,
+  updateProductSuccess,
+  addProductFailure,
+  addProductStart,
+  addProductSuccess,
+} from "./productRedux";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
-    // const res = await publicRequest.post("/auth/login", user);
-    const baseUrl = "http://localhost:5050/api";
-    const data = await (
-      await fetch(`${baseUrl}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user,
-        }),
-      })
-    ).json();
-    dispatch(loginSuccess(data));
-  } catch (error) {
+    const res = await publicRequest.post("/auth/login", user);
+    dispatch(loginSuccess(res.data));
+  } catch (err) {
     dispatch(loginFailure());
   }
 };

@@ -30,8 +30,8 @@ const Td = styled.td`
   font-weight: ${(props) => {
     if (props.user) {
       return "600";
-    } else if(props.date || props.amount) {
-        return "300";
+    } else if (props.date || props.amount) {
+      return "300";
     }
   }};
 `;

@@ -107,7 +107,7 @@ const NewUser = () => {
           </Select>
         </Item>
       </Form>
-        <Btn>Create</Btn>
+      <Btn>Create</Btn>
     </Container>
   );
 };
