@@ -1,5 +1,7 @@
 import { Visibility } from "@material-ui/icons";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -22,10 +24,10 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
 `;
 
 const Img = styled.img`
@@ -36,89 +38,79 @@ const Img = styled.img`
 `;
 
 const User = styled.div`
-    display:flex;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  display: flex;
+  flex-direction: column;
 `;
 
 const UserName = styled.span`
-    font-weight: 600;
+  font-weight: 600;
 `;
 
 const UserTitle = styled.span`
-    font-weight: 300;
+  font-weight: 300;
 `;
 
 const Button = styled.button`
-    display: flex;
-    align-items: center;
-    border: none;
-    border-radius: 10px;
-    padding: 7px 10px;
-    background-color:#eeeef7;
-    color: #555;
-    cursor:pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px;
+  background-color: #eeeef7;
+  color: #555;
+  cursor: pointer;
 `;
 const VisIcon = styled(Visibility)`
-    font-size:16px;
-    margin-right: 15px;
+  font-size: 16px;
+  margin-right: 15px;
 `;
 
 const WidgetSm = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const TOKEN = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    ).currentUser?.accessToken;
+
+    const getUsers = async () => {
+      const baseUrl = "http://localhost:5050/api";
+      const data = await (
+        await fetch(`${baseUrl}/users/?new=true`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: `Bearer ${TOKEN}`,
+          },
+        })
+      ).json();
+      setUsers(data);
+    };
+    getUsers();
+  }, []);
+
   return (
     <Container>
       <Title>New Join Members</Title>
       <List>
-        <ListItem>
-          <Img src="https://source.unsplash.com/random/2" />
-          <User>
-            <UserName>Anna Keller</UserName>
-            <UserTitle>Software Engineer</UserTitle>
-          </User>
-          <Button>
-            <VisIcon /> Display
-          </Button>
-        </ListItem>
-        <ListItem>
-          <Img src="https://source.unsplash.com/random/3" />
-          <User>
-            <UserName>Anna Keller</UserName>
-            <UserTitle>Software Engineer</UserTitle>
-          </User>
-          <Button>
-            <VisIcon /> Display
-          </Button>
-        </ListItem>
-        <ListItem>
-          <Img src="https://source.unsplash.com/random/4" />
-          <User>
-            <UserName>Anna Keller</UserName>
-            <UserTitle>Software Engineer</UserTitle>
-          </User>
-          <Button>
-            <VisIcon /> Display
-          </Button>
-        </ListItem>
-        <ListItem>
-          <Img src="https://source.unsplash.com/random/5" />
-          <User>
-            <UserName>Anna Keller</UserName>
-            <UserTitle>Software Engineer</UserTitle>
-          </User>
-          <Button>
-            <VisIcon /> Display
-          </Button>
-        </ListItem>
-        <ListItem>
-          <Img src="https://source.unsplash.com/random/6" />
-          <User>
-            <UserName>Anna Keller</UserName>
-            <UserTitle>Software Engineer</UserTitle>
-          </User>
-          <Button>
-            <VisIcon /> Display
-          </Button>
-        </ListItem>
+        {users.map((user) => (
+          <ListItem key={user._id}>
+            <Img
+              src={
+                user.img ||
+                "https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"
+              }
+            />
+            <User>
+              <UserName>{user.username}</UserName>
+              <UserTitle>User</UserTitle>
+            </User>
+            <Button>
+              <VisIcon /> Display
+            </Button>
+          </ListItem>
+        ))}
       </List>
     </Container>
   );

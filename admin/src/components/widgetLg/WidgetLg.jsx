@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -72,6 +74,29 @@ const Button = styled.button`
 `;
 
 const WidgetLg = () => {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const TOKEN = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    ).currentUser?.accessToken;
+
+    const getOrders = async () => {
+      const baseUrl = "http://localhost:5050/api";
+      const data = await (
+        await fetch(`${baseUrl}/orders`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: `Bearer ${TOKEN}`,
+          },
+        })
+      ).json();
+      setOrders(data);
+    };
+    getOrders();
+  }, []);
+
   return (
     <Container>
       <Title>Lastest transactions</Title>
@@ -82,51 +107,19 @@ const WidgetLg = () => {
           <Th>Amount</Th>
           <Th>Status</Th>
         </Tr>
-
-        <Tr>
-          <Td user>
-            <Img src="https://source.unsplash.com/random/7" />
-            <Name>Susan Carol</Name>
-          </Td>
-          <Td date>2 Jun 2021</Td>
-          <Td amount>$122.00</Td>
-          <Td status>
-            <Button type="Approved">Approved</Button>
-          </Td>
-        </Tr>
-        <Tr>
-          <Td user>
-            <Img src="https://source.unsplash.com/random/8" />
-            <Name>Susan Carol</Name>
-          </Td>
-          <Td date>2 Jun 2021</Td>
-          <Td amount>$122.00</Td>
-          <Td status>
-            <Button type="Declined">Declined</Button>
-          </Td>
-        </Tr>
-        <Tr>
-          <Td user>
-            <Img src="https://source.unsplash.com/random/9" />
-            <Name>Susan Carol</Name>
-          </Td>
-          <Td date>2 Jun 2021</Td>
-          <Td amount>$122.00</Td>
-          <Td status>
-            <Button type="Pending">Pending</Button>
-          </Td>
-        </Tr>
-        <Tr>
-          <Td user>
-            <Img src="https://source.unsplash.com/random/10" />
-            <Name>Susan Carol</Name>
-          </Td>
-          <Td date>2 Jun 2021</Td>
-          <Td amount>$122.00</Td>
-          <Td status>
-            <Button type="Approved">Approved</Button>
-          </Td>
-        </Tr>
+        {orders.map((order) => (
+          <Tr key={order._id}>
+            <Td user>
+              <Img src="https://source.unsplash.com/random/7" />
+              <Name>{order.userId}</Name>
+            </Td>
+            <Td date>{order.createdAt.slice(0,10)}</Td>
+            <Td amount>${order.amount}</Td>
+            <Td status>
+              <Button type="Approved">{order.status}</Button>
+            </Td>
+          </Tr>
+        ))}
       </Table>
     </Container>
   );

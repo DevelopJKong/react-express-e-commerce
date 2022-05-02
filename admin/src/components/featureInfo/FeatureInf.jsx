@@ -1,4 +1,6 @@
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+import { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Featured = styled.div`
@@ -52,14 +54,40 @@ const Sub = styled.span`
 `;
 
 const FeatureInf = () => {
+  const [income, setIncome] = useState([]);
+  const [perc, setPerc] = useState(0);
+
+  useEffect(() => {
+    const TOKEN = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    ).currentUser?.accessToken;
+    const getIncome = async () => {
+      try {
+        const baseUrl = "http://localhost:5050/api";
+        const data = await (
+          await fetch(`${baseUrl}/orders/income`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              token: `Bearer ${TOKEN}`,
+            },
+          })
+        ).json();
+        setIncome(data);
+        setPerc((data[1].total * 100) / data[0].total - 100);
+      } catch (error) {}
+    };
+    getIncome();
+  }, []);
+
   return (
     <Featured>
       <Item>
         <Title>Revane</Title>
         <MoneyContainer>
-          <Money>$2,415</Money>
+          <Money>${income[1].total}</Money>
           <MoneyRate>
-            -11.4
+            %{Math.floor(perc)}
             <ArrowDownIcon />
           </MoneyRate>
         </MoneyContainer>
