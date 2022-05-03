@@ -2,7 +2,9 @@ import { Publish } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
+import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 const Container = styled.div`
   flex: 4;
@@ -136,6 +138,62 @@ const UpdateBtn = styled.button`
 `;
 
 const Product = () => {
+  const location = useLocation();
+  const productId = location.pathname.split("/")[2];
+  const [pStats, setPStats] = useState([]);
+  const product = useSelector((state) =>
+    state.product.products.find((product) => product._id === productId)
+  );
+
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+  useEffect(() => {
+    const TOKEN = JSON.parse(
+      JSON.parse(localStorage.getItem("persist:root")).user
+    ).currentUser?.accessToken;
+    const getStats = async () => {
+      try {
+        const baseUrl = "http://localhost:5050/api";
+        const data = await (
+          await fetch(`${baseUrl}/orders/incom?pid=${productId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              token: `Bearer ${TOKEN}`,
+            },
+          })
+        ).json();
+        const list = data.sort((a, b) => {
+          return a._id - b._id;
+        });
+        list.map((item) =>
+          setPStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], "Sales": item.total },
+          ])
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStats();
+  }, [productId,MONTHS]);
+
   return (
     <Container>
       <TitleContainer>
@@ -146,29 +204,26 @@ const Product = () => {
       </TitleContainer>
       <Top>
         <TopLeft>
-          <Chart data={productData} dataKey="Sales" title="Sales Performance" />
+          <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
         </TopLeft>
         <TopRight>
           <InfoTop>
-            <InfoImg src="https://source.unsplash.com/random/20" />
-            <Name>Apple Airpods</Name>
+            <InfoImg src={product.img} />
+            <Name>{product.title}</Name>
           </InfoTop>
           <InfoBottom>
             <InfoItem>
               <InfoValue>id:</InfoValue>
-              <InfoKey>123</InfoKey>
+              <InfoKey>{product._id}</InfoKey>
             </InfoItem>
             <InfoItem>
               <InfoValue>sales:</InfoValue>
               <InfoKey>$123</InfoKey>
             </InfoItem>
-            <InfoItem>
-              <InfoValue>active:</InfoValue>
-              <InfoKey>yes</InfoKey>
-            </InfoItem>
+
             <InfoItem>
               <InfoValue>in stock:</InfoValue>
-              <InfoKey>No</InfoKey>
+              <InfoKey>{product.inStock}</InfoKey>
             </InfoItem>
           </InfoBottom>
         </TopRight>
@@ -177,21 +232,20 @@ const Product = () => {
         <Form>
           <FormLeft>
             <label>Product Name</label>
-            <input type="text" placeholder="Apple Airpod" />
+            <input type="text" placeholder={product.title} />
+            <label>Product Description</label>
+            <input type="text" placeholder={product.desc} />
+            <label>Price</label>
+            <input type="text" placeholder={product.price} />
             <label>In Stock</label>
             <select name="inStock" id="idStock">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-            <label>Active</label>
-            <select name="active" id="active">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </FormLeft>
           <FormRight>
             <Upload>
-              <UploadImg src="https://source.unsplash.com/random/30" />
+              <UploadImg src={product.img} />
               <label htmlFor="file">
                 <Publish />
               </label>

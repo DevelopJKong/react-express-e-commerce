@@ -73,9 +73,11 @@ const FeatureInf = () => {
             },
           })
         ).json();
-        setIncome(data);
+        setIncome(data ?? "loading...");
         setPerc((data[1].total * 100) / data[0].total - 100);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     getIncome();
   }, []);
@@ -85,10 +87,9 @@ const FeatureInf = () => {
       <Item>
         <Title>Revane</Title>
         <MoneyContainer>
-          <Money>${income[1].total}</Money>
+          <Money>${income[0]?.total}</Money>
           <MoneyRate>
-            %{Math.floor(perc)}
-            <ArrowDownIcon />
+            %{Math.floor(perc)} {perc < 0 ? <ArrowDownIcon /> : <ArrowUpIcon />}
           </MoneyRate>
         </MoneyContainer>
         <Sub>Compared to last month</Sub>

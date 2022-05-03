@@ -6,7 +6,6 @@ import Chart from "../../components/chart/Chart";
 import FeaturedInf from "../../components/featureInfo/FeatureInf";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
-import { userData } from "../../dummyData";
 const Container = styled.div`
   flex: 4;
 `;
